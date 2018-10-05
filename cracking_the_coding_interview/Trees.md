@@ -1,15 +1,15 @@
-# [Trees](/datastructures/tree.js)
+# [Trees](/dataStructures/tree.js)
 A tree is a data structure composed of nodes.
 * Each tree has a root node. 
 * The root node has zero or more child nodes.
 * Each child node has zero or more child nodes, and so on.
 * The tree cannot contain cycles. (That's a graph)
 
-## [Binary Tree](/datastructures/tree.js)
+## [Binary Tree](/dataStructures/tree.js)
 A binary tree is a tree in which each node has up to two children.
 A node is called a"leaf"node if it has no children.
 
-### [Binary Search Tree](/datastructures/tree.js)
+### [Binary Search Tree](/dataStructures/tree.js)
 A binary search tree is a binary tree in which for each node, its left descendents are less than or equal to the current node, which is less than the right descendents.
 * Note that this inequality must be true for all of a node's descendents, not just its immediate children.
 
@@ -90,7 +90,7 @@ postOrderTraversal(node, visit) {
 }
 ```
 
-### [Heap](/datastructures/tree.js)
+### [Heap](/dataStructures/tree.js)
 #### Min-Heap
 A [complete binary tree](#complete-binary-tree) where each node is smaller than its children. 
 * The root, therefore, is the minimum element in the tree.
@@ -113,7 +113,7 @@ Do we swap it with the left child or the right child? That depends on their valu
 A [complete binary tree](#complete-binary-tree) where each node is larger than its children. 
 * The root, therefore, is the maximum element in the tree.
 
-## [Trie](/datastructures/tree.js)
+## [Trie](/dataStructures/tree.js)
 A trie (sometimes called a prefix tree) is a variant of an n-ary tree in which characters are stored at each node. Each path down the tree may
 represent a word.
 

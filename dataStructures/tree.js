@@ -1,15 +1,18 @@
+"use strict";
+
 class Node{
-  constructor(value = null){
+  constructor(value){
     this.value = value;
   }
 }
 
 class Tree{
-  constructor(rootValue = null){
-    this.root = new Node(rootValue);
+  constructor(rootValue){
+    if(rootValue)
+      this.root = new Node(rootValue);
+    else this.root = null;
   }
   
-
   /*
   depthFirstSearch(value){
     let stack=[this.root];
@@ -56,40 +59,81 @@ class Tree{
   }
   */
 }
+
+class BinaryNode extends Node{
+  constructor(value){
+    super(value);
+    this.left = null;
+    this.right = null;
+  }
+}
 /**
  * @description A binary tree is a tree in which each node has up to two children.
  * A node is called a "leaf" node if it has no children.
  */
 class BinaryTree extends Tree{
-  constructor(rootValue = null){
-    super(rootValue);
-    this.root.left = null;
-    this.root.right = null;
+  constructor(rootValue){
+    super();
+    if(rootValue){
+      this.root = new BinaryNode(rootValue);
+    }else
+      this.root = null;
   }
 
-  insert(value){
-    let node = this.root;
-    if(!node.left){
-      node.left = new Node(value);
-    }else if(node.left && !node.right){
-      node.right = new Node(value);
-    }else if(node.left && node.right){
-      node = node.left;
+  getRootNode(){
+    return this.root;
+  }  
+}
+
+/**
+ * @description A binary search tree is a binary tree in which every node fits a specific ordering property: 
+ *  all left descendents <= n < all right descendents. 
+ *  This must be true for each node n.
+ */
+class BinarySearchTree extends BinaryTree{
+  constructor(rootValue){
+    super(rootValue);
+  }
+
+  insert(value) {
+    const newNode = new BinaryNode(value);
+    if(this.root === null)
+      this.root = newNode;
+    else{
+      let current = this.root;
+      let parent;
+      while(true) {
+        parent = current;
+        if (value < current.value) {
+          current = current.left;
+          if (current === null) {
+            parent.left = newNode;
+            break;
+          }
+        } else {
+          current = current.right;
+          if (current === null) {
+            parent.right = newNode;
+            break;
+          }
+        }
+      }
     }
-    return this; //so we can chain inserts
+    return this;
   }
   /**
    * @description the left branch, then the current node, and finally, the right branch.
    * @param {Node} node 
    * @param {function} visit is a callback function (can print or push to array or something)
    */
-  inOrderTraversal(node, visit) { 
-    if(!node) node = this.root;
-    if (node != null) {
-      inOrderTraversal(node.left);
+  inOrderTraversal(node, visit) {
+    while(node != null) {
+      this.inOrderTraversal(node.left, visit);
       visit(node); //either printing or doing some other kind of something.
-      inOrderTraversal(node.right);
+      this.inOrderTraversal(node.right, visit);
+      break;
     }
+    return
   }
 
   /**
@@ -98,11 +142,11 @@ class BinaryTree extends Tree{
    * @param {function} visit is a callback function (can print or push to array or something)
    */
   preOrderTraversal(node, visit) { 
-    if(!node) node = this.root;
-    if(node != null) {
+    while(node != null) {
       visit(node); //either printing or doing some other kind of something.
-      preOrderTraversal(node.left);
-      preOrderTraversal(node.right);
+      this.preOrderTraversal(node.left, visit);
+      this.preOrderTraversal(node.right, visit);
+      break;
     }
   }
   
@@ -112,51 +156,48 @@ class BinaryTree extends Tree{
    * @param {function} visit is a callback function (can print or push to array or something)
    */
   postOrderTraversal(node, visit) { 
-    if(!node) node = this.root;
-    if(node != null) {
-      postOrderTraversal(node.left);
-      postOrderTraversal(node.right);
+    while(node != null) {
+      this.postOrderTraversal(node.left, visit);
+      this.postOrderTraversal(node.right, visit);
       visit(node); //either printing or doing some other kind of something.
+      break;
     }
   }
-  
 }
 
-/**
- * @description A binary search tree is a binary tree in which every node fits a specific ordering property: 
- *  all left descendents <= n < all right descendents. 
- *  This must be true for each node n.
- */
-class BinarySearchTree extends BinaryTree{
-  constructor(rootValue = null){
-    super(rootValue);
-  }
-
-  insert(data){
-    
+class TrieNode extends Node{
+  constructor(value){
+    super(value);
+    this.children = {};
   }
 }
-
+const TERMINALNODE = '*';
 
 class Trie extends Tree{
   constructor(){
     super();
-    this.children = [];
+    this.root = new TrieNode();
   }
 
-  insert(data){
+  insert(value){
     let node = this.root;
-
+    for(let char of value){
+      if(!node.children[char]){
+        node.children[char] = new TrieNode(char);
+      }
+      node = node.children[char];
+    }
+    node.children[TERMINALNODE] = null;
     return this; //so we can chain inserts
   }
 }
 
 class Heap extends BinarySearchTree{
-  constructor(rootValue = null){
+  constructor(rootValue){
     super(rootValue);
   }
 
-  insert(data){
-    
+  insert(value){
+
   }
 }
