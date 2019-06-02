@@ -3,12 +3,12 @@ Various coding exercises and notes for studying purposes
 
 ## [Directories]()
 ### Data Structures
-#### [Tree](/datastructures/tree.js)
-##### [Binary Search Tree](/datastructures/tree.js)
-##### [Trie](/datastructures/tree.js)
-#### [LinkedList](/datastructures/linkedList.js)
-##### [Singly Linked List](/datastructures/linkedList.js)
-##### [Doubly Linked List](/datastructures/linkedList.js)
+#### [Tree](/dataStructures/tree.js)
+##### [Binary Search Tree](/dataStructures/tree.js)
+##### [Trie](/dataStructures/tree.js)
+#### [LinkedList](/dataStructures/linkedList.js)
+##### [Singly Linked List](/dataStructures/linkedList.js)
+##### [Doubly Linked List](/dataStructures/linkedList.js)
 ### Algorithms
 ### References
 ### Cracking The Coding Interview
